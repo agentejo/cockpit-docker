@@ -6,10 +6,13 @@ Start a container with:
 
 
 # Build  
-docker build -t cockpit-next .
+docker build -t aheinze/cockpit-next:latest .
+
+# Update Repo
+docker push aheinze/cockpit-next
 
 # Run
-docker run -p 4000:80 cockpit-next
+docker run -p 8080:80 aheinze/cockpit-next:latest
 
 # Cleanup
-docker rmi $(docker images -f "dangling=true" -q) cockpit-next -f
+docker rmi $(docker images -f "dangling=true" -q) aheinze/cockpit-next:latest -f
