@@ -27,4 +27,4 @@ COPY src /var/www/html/
 RUN chown -R www-data:www-data storage
 RUN chown -R www-data:www-data config
 
-VOLUME /var/www/html/storage
+VOLUME ["/var/www/html/storage", "/var/www/html/config"]
