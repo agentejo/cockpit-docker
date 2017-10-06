@@ -17,14 +17,15 @@ RUN apt-get update \
 RUN echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongodb.ini
 RUN echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini
 
-RUN wget https://github.com/agentejo/cockpit/archive/master.zip -O /var/www/html/cockpit.zip; unzip /var/www/html/cockpit.zip -d /var/www/html/; rm /var/www/html/cockpit.zip
-RUN mv /var/www/html/cockpit-master/.htaccess /var/www/html/.htaccess
-RUN mv /var/www/html/cockpit-master/* /var/www/html/
-RUN rm -R /var/www/html/cockpit-master/
+RUN wget https://github.com/agentejo/cockpit/archive/master.zip -O /tmp/cockpit.zip; unzip /tmp/cockpit.zip -d /tmp/; rm /tmp/cockpit.zip
+RUN mv /tmp/cockpit-master/.htaccess /var/www/html/.htaccess
+RUN mv /tmp/cockpit-master/* /var/www/html/
+RUN rm -R /tmp/cockpit-master/
+RUN echo "\n\nphp_value post_max_size 256M" >> /var/www/html/.htaccess
+RUN echo "\nphp_value  upload_max_filesize 256M" >> /var/www/html/.htaccess
 
 COPY src /var/www/html/
 
-RUN chown -R www-data:www-data storage
-RUN chown -R www-data:www-data config
+RUN chown -R www-data:www-data /var/www/html
 
 VOLUME ["/var/www/html/storage", "/var/www/html/config"]
