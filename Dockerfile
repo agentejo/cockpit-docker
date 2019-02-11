@@ -10,6 +10,7 @@ RUN apt-get update \
         libpng-dev \
         sqlite3 libsqlite3-dev \
         libssl-dev \
+        libzip-dev \
     && pecl install mongodb \
     && pecl install redis \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \

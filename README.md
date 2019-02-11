@@ -6,7 +6,7 @@ Start a container with:
 
 
 # Build  
-docker build -t agentejo/cockpit:latest .
+docker build -t agentejo/cockpit:latest . --no-cache
 
 # Update Repo
 docker push agentejo/cockpit
