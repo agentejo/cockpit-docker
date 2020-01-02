@@ -13,7 +13,7 @@ RUN apt-get update \
         libzip-dev \
     && pecl install mongodb \
     && pecl install redis \
-    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ \
     && docker-php-ext-install -j$(nproc) iconv gd pdo zip opcache pdo_sqlite \
     && a2enmod rewrite expires
 
@@ -31,4 +31,10 @@ COPY src /var/www/html/
 
 RUN chown -R www-data:www-data /var/www/html
 
+COPY ./entrypoint /usr/local/bin/
+RUN chmod +x /usr/local/bin/entrypoint
+
 VOLUME ["/var/www/html/storage", "/var/www/html/config"]
+
+ENTRYPOINT ["entrypoint"]
+CMD ["apache2-foreground"]
