@@ -34,7 +34,7 @@ RUN chown -R www-data:www-data /var/www/html
 COPY ./entrypoint /usr/local/bin/
 RUN chmod +x /usr/local/bin/entrypoint
 
-VOLUME ["/var/www/html/storage", "/var/www/html/config"]
+VOLUME ["/var/www/html/storage"]
 
 ENTRYPOINT ["entrypoint"]
 CMD ["apache2-foreground"]
